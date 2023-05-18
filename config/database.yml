@@ -84,3 +84,4 @@ production:
   database: foodfeed_production
   username: foodfeed
   password: <%= ENV["FOODFEED_DATABASE_PASSWORD"] %>
+  url: <%= ENV['DATABASE_URL'] %>
