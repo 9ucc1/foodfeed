@@ -10,4 +10,9 @@ class SessionsController < ApplicationController
         end
     end
 
+    def destroy
+        session.destroy
+        head :no_content
+    end
+
 end
