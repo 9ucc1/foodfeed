@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
   resources :users, only: [:index]
 
+  post '/login', to: 'sessions#create'
+
   get '*path',
   to: 'fallback#index',
   constraints: ->(req) { !req.xhr? && req.format.html? }

@@ -3,6 +3,7 @@ import {useState, useEffect} from 'react'
 import {BrowserRouter, Switch, Route} from 'react-router-dom'
 import EditProfile from './EditProfile.js'
 import Signup from './Signup.js'
+import Login from './Login.js'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
             <h1>Page Count: {count}</h1>
             <EditProfile/>
             <Signup/>
+            <Login/>
           </Route>
         </Switch>
       </div>
