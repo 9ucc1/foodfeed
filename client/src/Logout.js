@@ -1,6 +1,9 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import {UserContext} from './context/user'
 
 function Logout(){
+
+    const {logout} = useContext(UserContext)
 
     function handleLogout(){
         fetch('/logout', {
@@ -8,7 +11,7 @@ function Logout(){
         })
         .then(r=>{
             if (r.ok){
-                //logout()
+                logout()
                 alert("You've been logged out!")
             }
         })

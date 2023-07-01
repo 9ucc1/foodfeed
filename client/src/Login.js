@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {UserContext} from './context/user'
 
 function Login(){
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const {login} = useContext(UserContext)
 
     function handleSubmit(e){
         e.preventDefault()
@@ -17,7 +19,7 @@ function Login(){
             })
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
+        .then(r=>login(r))
     }
 
     return(
