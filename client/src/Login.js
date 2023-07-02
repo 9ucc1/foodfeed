@@ -1,11 +1,14 @@
 import React, {useState, useContext} from 'react'
+import {useHistory} from 'react-router-dom'
 import {UserContext} from './context/user'
 
 function Login(){
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const [errorsList, setErrorsList] = useState("")
     const {login} = useContext(UserContext)
+    const history = useHistory()
 
     function handleSubmit(e){
         e.preventDefault()
@@ -19,7 +22,16 @@ function Login(){
             })
         })
         .then(r=>r.json())
-        .then(r=>login(r))
+        .then(r=>{
+            if (!r.error){
+                login(r)
+                history.push('/')
+            } else {
+                setErrorsList(r.error)
+                setUsername("")
+                setPassword("")
+            }
+        })
     }
 
     return(
@@ -43,6 +55,7 @@ function Login(){
             <br/>
             <button type="submit">Log In</button>
         </form>
+        {errorsList}
         </>
     )
 }

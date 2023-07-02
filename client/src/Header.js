@@ -30,6 +30,56 @@ function Header(){
             >
                 Home
         </NavLink>
+        { user === null || user.error ? (<>
+            <NavLink
+                to="/login"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Log In
+            </NavLink>
+            <NavLink
+                to="/signup"
+                exact
+                style={linkStyles}
+                activeStyle={{
+                    background: "beige",
+                    color: "black",
+                  }}
+            >
+                Sign Up
+        </NavLink>
+         </>)
+         :
+            (<>
+            <NavLink
+                    to={`/profile/${user.id}`}
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    My Profile
+            </NavLink>
+            <NavLink
+                    to="/logout"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    Log Out
+            </NavLink>
+            </>)
+         }
         </>
     )
 }

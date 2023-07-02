@@ -2,11 +2,13 @@ import './App.css';
 import {useState, useEffect} from 'react'
 import {UserProvider} from './context/user'
 import {Switch, Route} from 'react-router-dom'
-import EditProfile from './EditProfile.js'
 import Signup from './Signup.js'
 import Login from './Login.js'
 import Logout from './Logout.js'
 import Header from './Header.js'
+import Homepage from './Homepage.js'
+import Profile from './Profile.js'
+import EditProfile from './EditProfile.js'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -22,6 +24,12 @@ function App() {
         <UserProvider>
         <Header/>
         <Switch>
+          <Route path='/profile/:id/edit'>
+            <EditProfile/>
+          </Route>
+          <Route path='/profile/:id'>
+            <Profile/>
+          </Route>
           <Route path='/login'>
             <Login/>
           </Route>
@@ -33,7 +41,7 @@ function App() {
           </Route>
           <Route path="/">
             <h1>Page Count: {count}</h1>
-            <EditProfile/>
+            <Homepage/>
           </Route>
         </Switch>
         </UserProvider>
