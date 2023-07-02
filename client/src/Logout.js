@@ -4,7 +4,7 @@ import {UserContext} from './context/user'
 
 function Logout(){
 
-    const {history} = useHistory()
+    const history = useHistory()
     const {logout} = useContext(UserContext)
 
     function handleLogout(){

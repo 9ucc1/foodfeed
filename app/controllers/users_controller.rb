@@ -2,7 +2,13 @@ class UsersController < ApplicationController
 
     def create
         user = User.create(user_params)
-        render json: user, status: :created
+        if user.valid?
+            profile = Profile.create(user_id: user.id)
+            session[:user_id] = user.id
+            render json: user, status: :created
+        else
+            render json: {errors: user.errors.full_messages}
+        end
     end
 
     def index

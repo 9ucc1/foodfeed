@@ -1,10 +1,15 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import {UserContext} from './context/user'
+import {useHistory} from 'react-router-dom'
 
 function Signup(){
 
+    const history = useHistory()
+    const {signup} = useContext(UserContext)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirmation, setPasswordConfirmation] = useState("")
+    const [errorsList, setErrorsList] = useState([])
 
     function handleSubmit(e){
         console.log("submit")
@@ -19,7 +24,19 @@ function Signup(){
             })
         })
         .then(r=>r.json())
-        .then(console.log("user created"))
+        .then(user=>{
+            if (!user.errors){
+                signup(user)
+                alert("account created!")
+                history.push('/')
+            } else {
+                setUsername("")
+                setPassword("")
+                setPasswordConfirmation("")
+                const errorLis = user.errors.map(error=> <li>{error}</li>)
+                setErrorsList(errorLis)
+            }
+        })
     }
 
     return (
@@ -49,6 +66,7 @@ function Signup(){
             <br/>
             <button type="submit">Sign Up</button>
         </form>
+        {errorsList}
         </>
     )
 }
