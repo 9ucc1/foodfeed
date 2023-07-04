@@ -23,6 +23,21 @@ function EditProfile(){
         e.preventDefault()
         console.log(profile, imageUpload)
         //console.log(e.target.image.files)
+        fetch(`/profiles/${profile.id}`,{
+            method: "PATCH",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(
+                {
+                    "display_name": profile.display_name,
+                    "bio": profile.bio,
+                    "image": imageUpload
+                }
+            )
+        })
+        .then(r=>r.json())
+        .then(profil=>{
+            console.log(profil)
+        })
     }
 
     return(

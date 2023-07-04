@@ -2,7 +2,8 @@ class ProfilesController < ApplicationController
 
     def create
         profile = Profile.create!(profile_params)
-        render json: profile
+        #render json: profile
+        render json: profile, include: :image
     end
 
     def index
@@ -16,16 +17,15 @@ class ProfilesController < ApplicationController
 
     def update
         profile = Profile.find(params[:id])
-        #profile.update(profile_params)
-        profile.image.attach(avatar_params)
-        render json: profile, status: :created
+        profile.update(profile_params)
+        #profile.image.attach(avatar_params)
+        render json: profile, include: :image, status: :created
     end
 
-    
     private
 
     def profile_params
-        params.permit(:bio, :display_name, :user_id)
+        params.permit(:bio, :display_name, :user_id, :image)
     end
 
     def avatar_params
