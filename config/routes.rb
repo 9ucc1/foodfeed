@@ -9,10 +9,14 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
 
   post '/signup', to: 'users#create'
-  resources :users, only: [:index]
+  resources :users, only: [:index] do
+    resources :profiles
+  end
 
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
+
+  resources :profiles
 
   get '*path',
   to: 'fallback#index',
