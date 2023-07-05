@@ -4,6 +4,8 @@ Rails.application.routes.default_url_options = {
   host: "http://localhost:3000"
 }
 
+#config.active_storage.service = :local
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

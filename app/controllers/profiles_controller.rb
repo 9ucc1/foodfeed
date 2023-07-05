@@ -16,16 +16,17 @@ class ProfilesController < ApplicationController
     end
 
     def update
+        #byebug
         profile = Profile.find(params[:id])
         profile.update(profile_params)
-        #profile.image.attach(avatar_params)
+        #avatar = profile.image.attach(avatar_params)
         render json: profile, include: :image, status: :created
     end
 
     private
 
     def profile_params
-        params.permit(:bio, :display_name, :user_id, :image)
+        params.require(:profile).permit(:bio, :display_name, :user_id, :image)
     end
 
     def avatar_params

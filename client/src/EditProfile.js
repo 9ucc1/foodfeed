@@ -21,8 +21,8 @@ function EditProfile(){
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log(profile, imageUpload)
-        //console.log(e.target.image.files)
+        //console.log(profile, imageUpload)
+        console.log(e.target.image.files)
         fetch(`/profiles/${profile.id}`,{
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
@@ -30,7 +30,7 @@ function EditProfile(){
                 {
                     "display_name": profile.display_name,
                     "bio": profile.bio,
-                    "image": imageUpload
+                    "image": e.target.image.files
                 }
             )
         })
