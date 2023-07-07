@@ -1,28 +1,50 @@
 import React, {useContext, useState} from 'react'
 import {UserContext} from './context/user'
+import { DirectUpload } from 'activestorage';
 
 function EditProfile(){
 
     const {user} = useContext(UserContext)
     //console.log(user)
     const [profile, setProfile] = useState(user.profile)
-    const [imageUpload, setImageUpload] = useState(user.profile.image)
+    
 
     function handleChange(e){
-        setProfile((currentProfileState)=>(
-            {...currentProfileState, [e.target.name]: e.target.value}
-        ))
-    }
-
-    function handleImage(e){
-        console.log(e.target.files)
-        setImageUpload(e.target.files)
+        if(e.target.name === 'image'){
+            setProfile((currentProfileState)=>(
+                {...currentProfileState, [e.target.name]: e.target.files[0]}
+            ))
+        } else {
+            setProfile((currentProfileState)=>(
+                {...currentProfileState, [e.target.name]: e.target.value}
+            ))
+        }
     }
 
     function handleSubmit(e){
         e.preventDefault()
-        //console.log(profile, imageUpload)
-        console.log(e.target.image.files)
+       // console.log(profile)
+        const formData = new FormData();
+        formData.append(`profile[display_name]`, profile.display_name);
+        formData.append(`profile[bio]`, profile.bio);
+        formData.append(`profile[image]`, e.target.image.files[0])
+        submitData(formData)
+    }
+
+    function submitData(formData){
+        fetch(`/profiles/${profile.id}`,{
+            method: "PATCH",
+            //headers: {"Content-Type": "application/json"},
+            //headers: { 'content-type': 'multipart/form-data' },
+            body: formData
+        })
+        .then(r=>r.json())
+        .then(r=>console.log(r))
+    }
+
+    /*function handleSubmit(e){
+        e.preventDefault()
+        //console.log(profile)
         fetch(`/profiles/${profile.id}`,{
             method: "PATCH",
             headers: {"Content-Type": "application/json"},
@@ -30,15 +52,27 @@ function EditProfile(){
                 {
                     "display_name": profile.display_name,
                     "bio": profile.bio,
-                    "image": e.target.image.files
+                    "image": e.target.image.files[0]
                 }
-            )
+            ) //JSON.stringify(profile),
         })
         .then(r=>r.json())
-        .then(profil=>{
-            console.log(profil)
+        .then(profile=>{
+            console.log(profile)
+            //console.log(e.target.image.files[0])
+            //uploadFile(e.target.image.files[0], profile)
         })
     }
+    function uploadFile(file, user){
+        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
+        upload.create((error, blob) => {
+            if (error){
+                console.log(error)
+            } else {
+                console.log("no error")
+            }
+        })
+    }*/
 
     return(
         <>
@@ -66,7 +100,7 @@ function EditProfile(){
           //multiple ref={imagesRef}
           className="file-upload"
           accept="image/png, image/jpeg, image/heic"
-          onChange={handleImage}
+          onChange={handleChange}
         />
         <br/>
         <button type="submit">Save Changes</button>

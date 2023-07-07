@@ -19,6 +19,8 @@ function App() {
     .then(r=>setCount(r.count))
   }, [])
 
+
+  //FIX PROFILE ROUTES
   return (
       <div className="App">
         <UserProvider>

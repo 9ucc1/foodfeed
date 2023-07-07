@@ -2,7 +2,6 @@ class ProfilesController < ApplicationController
 
     def create
         profile = Profile.create!(profile_params)
-        #render json: profile
         render json: profile, include: :image
     end
 
@@ -16,9 +15,10 @@ class ProfilesController < ApplicationController
     end
 
     def update
-        #byebug
+        byebug
         profile = Profile.find(params[:id])
-        profile.update(profile_params)
+        profile.update!(profile_params)
+        #profile.image.attach(params[:image])
         #avatar = profile.image.attach(avatar_params)
         render json: profile, include: :image, status: :created
     end
