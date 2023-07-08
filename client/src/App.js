@@ -26,10 +26,10 @@ function App() {
         <UserProvider>
         <Header/>
         <Switch>
-          <Route path='/profile/:id/edit'>
+          <Route path='/user/:id/edit'>
             <EditProfile/>
           </Route>
-          <Route path='/profile/:id'>
+          <Route path='/user/:id'>
             <Profile/>
           </Route>
           <Route path='/login'>

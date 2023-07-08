@@ -11,7 +11,8 @@ class ProfilesController < ApplicationController
 
     def show
         profile = Profile.find(params[:id])
-        render json: profile
+        avatar = rails_blob_path(profile.image)
+        render json: {profile: profile, image: avatar}
     end
 
     def update

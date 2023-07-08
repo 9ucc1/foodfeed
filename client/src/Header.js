@@ -1,6 +1,6 @@
 import React, {useContext} from 'react'
 import {UserContext} from './context/user'
-import {NavLink} from 'react-router-dom'
+import {NavLink, Link} from 'react-router-dom'
 
 function Header(){
 
@@ -18,7 +18,7 @@ function Header(){
 
     return (
         <>
-        {user === null || user.error ? (<p>you are not logged in</p>) : (<p>you are logged in as {user.username}</p>)}
+        {user === null || user.error ? (<p>you are not logged in</p>) : (<p>you are logged in as <Link to={`/user/${user.id}`}>{user.username}</Link></p>)}
         <NavLink
                 to="/"
                 exact
@@ -57,7 +57,7 @@ function Header(){
          :
             (<>
             <NavLink
-                    to={`/profile/${user.id}`}
+                    to={`/user/${user.id}`}
                     exact
                     style={linkStyles}
                     activeStyle={{
