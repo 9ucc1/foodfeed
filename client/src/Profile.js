@@ -17,15 +17,23 @@ function Profile(){
         console.log(profile)
     },[])
 
+    //useeffect stuff comes in late. can't directly input values as divs, find another way
+    //image src is fine because it loads a second later.
+
     return(
         <>
         <br/>
         {params.id==user.id ? <Link to={`/user/${user.id}/edit`}>
             Edit my profile
-        </Link> : <div></div>}
+        </Link> : <div>'s profile</div>}
+        <div>'s profile</div>
         <div>
-            avatar
+            display name:
+            <div></div>
+            avatar:
             <img src={profile.image}/>
+            bio:
+            <div></div>
         </div>
         </>
     )
