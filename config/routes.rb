@@ -9,9 +9,6 @@ Rails.application.routes.draw do
   get '/me', to: 'users#show'
 
   post '/signup', to: 'users#create'
-  #resources :users, only: [:index] do
-  #  resources :profiles
-  #end
 
   resources :users, only: [:index]
 
@@ -19,8 +16,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :profiles
-
-  post '/rails/active_storage/direct_uploads', to: 'direct_uploads#create'
+  resources :posts
 
   get '*path',
   to: 'fallback#index',
