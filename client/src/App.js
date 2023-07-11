@@ -9,6 +9,7 @@ import Header from './Header.js'
 import Homepage from './Homepage.js'
 import Profile from './Profile.js'
 import EditProfile from './EditProfile.js'
+import NewPost from './NewPost.js'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path='/user/:id'>
             <Profile/>
+          </Route>
+          <Route path='/posts/new'>
+            <NewPost/>
           </Route>
           <Route path='/login'>
             <Login/>

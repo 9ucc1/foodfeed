@@ -68,6 +68,17 @@ function Header(){
                     My Profile
             </NavLink>
             <NavLink
+                    to="/posts/new"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    New Post
+            </NavLink>
+            <NavLink
                     to="/logout"
                     exact
                     style={linkStyles}
