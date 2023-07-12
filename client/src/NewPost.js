@@ -4,7 +4,8 @@ import {UserContext} from './context/user'
 function NewPost(){
 
     const initialNewPost = {
-        caption: ""
+        caption: "",
+        image: []
     }
 
     const {user} = useContext(UserContext)
@@ -26,6 +27,23 @@ function NewPost(){
     function handleSubmit(e){
         e.preventDefault()
         console.log(newPost)
+        const formData = new FormData();
+        formData.append(`post[caption]`, newPost.caption);
+        formData.append(`post[image]`, e.target.image.files[0]);
+        formData.append(`post[user_id]`, user.id);
+        submitData(formData)
+    }
+    // must submit with image
+
+    function submitData(formData){
+        fetch(`/posts`,{
+            method: "POST",
+            //headers: {"Content-Type": "application/json"},
+            //headers: { 'content-type': 'multipart/form-data' },
+            body: formData
+        })
+        .then(r=>r.json())
+        .then(r=>console.log(r))
     }
 
     return(
@@ -47,7 +65,7 @@ function NewPost(){
                 onChange={handleChange}
             />
         <br/>
-        <button type="submit">Save Changes</button>
+        <button type="submit">Create Post</button>
         </form>
         </>
     )

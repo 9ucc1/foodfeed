@@ -7,33 +7,26 @@ function Profile(){
 
     const params = useParams()
     const {user} = useContext(UserContext)
-    const [profile, setProfile] = useState([])
+    const [profile, setProfile] = useState({image: "", profile: {display_name: ""}})
     console.log(params)
 
     useEffect(()=>{
         fetch(`/profiles/${params.id}`)
         .then(r=>r.json())
         .then(r=>setProfile(r))
-        console.log(profile)
     },[])
-
-    //useeffect stuff comes in late. can't directly input values as divs, find another way
-    //image src is fine because it loads a second later.
+    console.log(profile)
 
     return(
         <>
         <br/>
         {params.id==user.id ? <Link to={`/user/${user.id}/edit`}>
             Edit my profile
-        </Link> : <div>'s profile</div>}
-        <div>'s profile</div>
+        </Link> : <div></div>}
         <div>
-            display name:
-            <div></div>
-            avatar:
             <img src={profile.image}/>
-            bio:
-            <div></div>
+            <h3>{profile.profile.display_name}</h3>
+            <div>{profile.profile.bio}</div>
         </div>
         </>
     )

@@ -1,6 +1,5 @@
 import React, {useContext, useState} from 'react'
 import {UserContext} from './context/user'
-import { DirectUpload } from 'activestorage';
 
 function EditProfile(){
 
@@ -23,13 +22,15 @@ function EditProfile(){
 
     function handleSubmit(e){
         e.preventDefault()
-       // console.log(profile)
+        console.log(profile)
         const formData = new FormData();
         formData.append(`profile[display_name]`, profile.display_name);
         formData.append(`profile[bio]`, profile.bio);
         formData.append(`profile[image]`, e.target.image.files[0])
         submitData(formData)
     }
+
+    // if image wasnt attached, attach a default
 
     function submitData(formData){
         fetch(`/profiles/${profile.id}`,{
@@ -93,7 +94,7 @@ function EditProfile(){
                 onChange={handleChange}
             />
         <br/>
-        <label>Avatar:</label>
+        <label>Upload New Avatar:</label>
         <input
           type="file"
           name="image"
