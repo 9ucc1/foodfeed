@@ -1,6 +1,7 @@
 import './App.css';
 import {useState, useEffect} from 'react'
 import {UserProvider} from './context/user'
+import {PostsProvider} from './context/posts'
 import {Switch, Route} from 'react-router-dom'
 import Signup from './Signup.js'
 import Login from './Login.js'
@@ -10,6 +11,7 @@ import Homepage from './Homepage.js'
 import Profile from './Profile.js'
 import EditProfile from './EditProfile.js'
 import NewPost from './NewPost.js'
+import Posts from './Posts.js'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -25,6 +27,7 @@ function App() {
   return (
       <div className="App">
         <UserProvider>
+          <PostsProvider>
         <Header/>
         <Switch>
           <Route path='/user/:id/edit'>
@@ -35,6 +38,9 @@ function App() {
           </Route>
           <Route path='/posts/new'>
             <NewPost/>
+          </Route>
+          <Route path='/posts'>
+            <Posts/>
           </Route>
           <Route path='/login'>
             <Login/>
@@ -50,6 +56,7 @@ function App() {
             <Homepage/>
           </Route>
         </Switch>
+          </PostsProvider>
         </UserProvider>
       </div>
   );
