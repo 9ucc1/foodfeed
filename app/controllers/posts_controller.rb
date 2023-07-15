@@ -10,11 +10,14 @@ class PostsController < ApplicationController
 
     def show
         post = Post.find(params[:id])
-        render json: post, include: :image
+        image = rails_blob_path(post.image)
+        render json: {post: post, image: image}
     end
 
     def index
-        render json: Post.all, include: :image
+        #render json: Post.all, include: :image
+        posts = Post.all
+        render json: posts, include: :image
     end
 
     private

@@ -25,7 +25,10 @@ function Posts(){
     return(
         <>
         {posts.map(post=> (
+            <>
             <div>{post.caption}</div>
+            <img src={post.image_url}></img>
+            </>
         ))}
         </>
     )
