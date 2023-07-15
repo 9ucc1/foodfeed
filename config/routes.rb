@@ -10,13 +10,13 @@ Rails.application.routes.draw do
 
   post '/signup', to: 'users#create'
 
-  resources :users, only: [:index]
-
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  resources :profiles
+  resources :users, only: [:index, :create, :show]
+  resources :profiles, only: [:create, :update, :show, :index]
   resources :posts
+  resources :comments, only: [:create, :destroy, :show, :index]
 
   get '*path',
   to: 'fallback#index',
