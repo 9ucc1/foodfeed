@@ -15,7 +15,7 @@ function PostsProvider({children}){
         })
     }, [])
 
-    console.log(posts)
+    //console.log(posts)
 
     if (!isLoaded){
         return(
