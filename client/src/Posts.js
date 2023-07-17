@@ -23,6 +23,7 @@ function Posts(){
     }*/
 
     const {posts} = useContext(PostsContext)
+    console.log(posts)
 
     return(
         <>

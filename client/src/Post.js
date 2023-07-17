@@ -13,6 +13,7 @@ function Post({image_url, caption, post_id, user_id, comments}){
         .then(r=>r.json())
         .then(r=>setPostUser(r))
     }, [])
+    //console.log(postUser)
 
     function handleChange(e){
         setNewComment(e.target.value)

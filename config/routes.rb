@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get '/hello', to: 'application#hello_world'
 
-  get '/me', to: 'users#show'
+  get '/me', to: 'users#me'
 
   post '/signup', to: 'users#create'
 
