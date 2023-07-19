@@ -65,7 +65,7 @@ function Post({image_url, caption, post_id, user_id, comments}){
                 <>
                     <Comment 
                     post_id={post_id} 
-                    user_id={comment.user_id} 
+                    comment_user={comment.user_id} 
                     comment_id={comment.id} 
                     text={comment.text}
                     />
