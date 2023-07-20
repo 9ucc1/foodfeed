@@ -18,6 +18,7 @@ function Header(){
 
     return (
         <>
+        <h2>FOODFEED</h2>
         {user === null || user.error ? (<p>you are not logged in</p>) : (<p>you are logged in as <Link to={`/user/${user.id}`}>{user.username}</Link></p>)}
         <NavLink
                 to="/"
@@ -57,17 +58,6 @@ function Header(){
          :
             (<>
             <NavLink
-                    to={`/user/${user.id}`}
-                    exact
-                    style={linkStyles}
-                    activeStyle={{
-                        background: "beige",
-                        color: "black",
-                      }}
-                >
-                    My Profile
-            </NavLink>
-            <NavLink
                     to="/posts/new"
                     exact
                     style={linkStyles}
@@ -87,7 +77,7 @@ function Header(){
                         color: "black",
                       }}
                 >
-                    All Posts
+                    Feed
             </NavLink>
             <NavLink
                     to="/logout"

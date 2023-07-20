@@ -19,12 +19,22 @@ class ProfilesController < ApplicationController
     #    end
     #end
 
+    #def show
+    #    profile = Profile.find(params[:id])
+    #    avatar = rails_blob_path(profile.image)
+    #    render json: {profile: profile, image: avatar}
+    #end
+    # what is this thing receiving? just id?
+
     def show
         profile = Profile.find(params[:id])
-        avatar = rails_blob_path(profile.image)
+        if profile.image.attached?
+            avatar = rails_blob_path(profile.image)
+        else 
+            avatar = []
+        end
         render json: {profile: profile, image: avatar}
     end
-    # what is this thing receiving? just id?
 
     def update
         #byebug

@@ -14,13 +14,13 @@ import NewPost from './NewPost.js'
 import Posts from './Posts.js'
 
 function App() {
-  const [count, setCount] = useState(0)
+  /*const [count, setCount] = useState(0)
 
   useEffect(()=>{
     fetch('/hello')
     .then(r=>r.json())
     .then(r=>setCount(r.count))
-  }, [])
+  }, [])*/
 
 
   //FIX PROFILE ROUTES
@@ -52,7 +52,6 @@ function App() {
             <Signup/>
           </Route>
           <Route path="/">
-            <h1>Page Count: {count}</h1>
             <Homepage/>
           </Route>
         </Switch>
