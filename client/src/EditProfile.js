@@ -22,7 +22,7 @@ function EditProfile(){
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log(profile)
+        console.log(profile, e.target.image.files[0])
         const formData = new FormData();
         formData.append(`profile[display_name]`, profile.display_name);
         formData.append(`profile[bio]`, profile.bio);

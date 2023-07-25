@@ -20,7 +20,7 @@ function Profile(){
     return(
         <>
         <br/>
-        {params.id==user.id ? <Link to={`/user/${user.id}/edit`}>
+        {params.id==user.id ? <Link to={`/users/${user.id}/edit`}>
             Edit my profile
         </Link> : <div></div>}
         <div>

@@ -30,10 +30,10 @@ function App() {
           <PostsProvider>
         <Header/>
         <Switch>
-          <Route path='/user/:id/edit'>
+          <Route path='/users/:id/edit'>
             <EditProfile/>
           </Route>
-          <Route path='/user/:id'>
+          <Route path='/users/:id'>
             <Profile/>
           </Route>
           <Route path='/posts/new'>

@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+    before_action :authorize
+    skip_before_action :authorize, only: [:index, :show]
 
     def create
         #post1 = Post.create(post_params)
@@ -18,6 +20,12 @@ class PostsController < ApplicationController
         #render json: Post.all, include: :image
         posts = Post.all
         render json: posts, include: :image
+    end
+
+    def destroy
+        post = Post.find(params[:id])
+        post.destroy
+        head :no_content
     end
 
     private

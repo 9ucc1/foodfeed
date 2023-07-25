@@ -1,7 +1,8 @@
 import React, {useContext} from 'react'
 import {UserContext} from './context/user'
+import {Link} from 'react-router-dom'
 
-function Comment({post_id, comment_id, comment_user, text}){
+function Comment({post_id, comment_id, comment_user_id, text}){
 
     const {user} = useContext(UserContext)
 
@@ -17,10 +18,12 @@ function Comment({post_id, comment_id, comment_user, text}){
         })
     }
 
+    // using the comment user id, find the user's username and link to their profile
+
     return(
         <>
-        {text} {post_id} {comment_id} {comment_user} 
-        {user.id == comment_user ? <button onClick={handleDelete}>Delete</button> : <></>}
+        {text} {post_id} {comment_id} <Link to={`/users/${comment_user_id}`}>link</Link>
+        {user.id == comment_user_id ? <button onClick={handleDelete}>Delete</button> : <></>}
         <br/>
         </>
     )
