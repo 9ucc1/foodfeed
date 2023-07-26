@@ -56,10 +56,23 @@ function Post({image_url, caption, post_id, user_id, comments}){
         .then(r=>console.log(r))
     }
 
+    function handleDelete(e){
+        console.log("delete")
+        fetch(`/posts/${post_id}`, {
+            method: "DELETE",
+        })
+        .then(r=> {
+            if (r.ok){
+                console.log("deleted")
+            }
+        })
+    }
+
     return(
         <>
             <img src={image_url}></img>
             <div>{postUser.username}: {caption}</div>
+            {user.id == postUser.id ? <button onClick={handleDelete}>Delete Post</button> : <></>}
             <div>Comments</div>
             <div>{comments.map(comment => (
                 <>
