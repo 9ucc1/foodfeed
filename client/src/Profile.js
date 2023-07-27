@@ -27,6 +27,7 @@ function Profile(){
             <img src={profile.image}/>
             <h3>{profile.profile.display_name}</h3>
             <div>{profile.profile.bio}</div>
+            <h3>{profile.profile.display_name}'s posts</h3>
         </div>
         </>
     )

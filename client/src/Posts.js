@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {PostsContext} from './context/posts'
-import Comment from './Comment.js'
 import Post from './Post.js'
 
 function Posts(){

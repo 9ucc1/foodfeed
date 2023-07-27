@@ -54,6 +54,17 @@ function Header(){
             >
                 Sign Up
         </NavLink>
+        <NavLink
+                    to="/posts"
+                    exact
+                    style={linkStyles}
+                    activeStyle={{
+                        background: "beige",
+                        color: "black",
+                      }}
+                >
+                    Feed
+            </NavLink>
          </>)
          :
             (<>

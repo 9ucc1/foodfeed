@@ -18,8 +18,9 @@ class PostsController < ApplicationController
 
     def index
         #render json: Post.all, include: :image
-        posts = Post.all
+        posts = Post.all.order(created_at: :desc)
         render json: posts, include: :image
+        # render these as timestamp latest first
     end
 
     def destroy

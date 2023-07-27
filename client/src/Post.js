@@ -72,8 +72,8 @@ function Post({image_url, caption, post_id, user_id, comments}){
         <>
             <img src={image_url}></img>
             <div>{postUser.username}: {caption}</div>
-            {user.id == postUser.id ? <button onClick={handleDelete}>Delete Post</button> : <></>}
-            <div>Comments</div>
+            {user.id === null || user.id != postUser.id ? <></> : <button onClick={handleDelete}>Delete Post</button>}
+            <h4>Comments</h4>
             <div>{comments.map(comment => (
                 <>
                     <Comment 
@@ -84,13 +84,14 @@ function Post({image_url, caption, post_id, user_id, comments}){
                     />
                 </>
             ))}</div>
-            <form onSubmit={handleSubmit}>
+            {user === null || user.error ? (<p>Log in to join the conversation.</p>) :
+            (<form onSubmit={handleSubmit}>
             <textarea
                 type="text" name="new_comment" value={newComment}
                 onChange={handleChange}
             />
             <button type="submit">Post new comment</button>
-            </form>
+            </form>)}
             <br/>
         </>
     )
