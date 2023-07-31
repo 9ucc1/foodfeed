@@ -14,28 +14,10 @@ function Post({image_url, caption, post_id, user_id, comments}){
         .then(r=>r.json())
         .then(r=>setPostUser(r))
     }, [])
-    //console.log(postUser)
 
     function handleChange(e){
         setNewComment(e.target.value)
     }
-
-    /*function handleSubmit(e){
-        e.preventDefault()
-        //console.log(newComment, post_id, user_id, user.id)
-        const formData = {
-            text: newComment,
-            post_id: post_id,
-            user_id: user.id
-        }
-        console.log(formData)
-        fetch('/comments', {
-            method: "POST",
-            body: JSON.stringify(formData)
-        })
-        .then(r=>r.json())
-        .then(r=>console.log(r))
-    }*/
 
     function handleSubmit(e){
         e.preventDefault()
@@ -49,8 +31,6 @@ function Post({image_url, caption, post_id, user_id, comments}){
     function submitData(formData){
         fetch(`/comments`,{
             method: "POST",
-            //headers: {"Content-Type": "application/json"},
-            //headers: { 'content-type': 'multipart/form-data' },
             body: formData
         })
         .then(r=>r.json())

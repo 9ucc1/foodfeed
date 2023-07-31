@@ -1,11 +1,12 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from './context/user'
-import {useParams} from 'react-router-dom'
+import {useParams, Link} from 'react-router-dom'
 
 function EditPost(){
 
     const {user} = useContext(UserContext)
-    const [editPost, setEditPost] = useState([])
+    const [editPost, setEditPost] = useState({image: "", post: {user_id: ""}})
+    const [errorsList, setErrorsList] = useState([])
     const params = useParams()
 
     useEffect(()=> {
@@ -15,45 +16,41 @@ function EditPost(){
     }, [])
     console.log(editPost, user)
 
+    function handleChange(e){
+        console.log(e)
+    }
+
+    function handleSubmit(e){
+        e.preventDefault()
+    }
+
+    function handleDelete(){
+        console.log("delete")
+    }
+
     if (!user || user.error || user.id != editPost.post.user_id){
         return <h3>You're not authorized to edit this post.</h3>
     } else {
         return(
-            <>form here</>
-            /*
             <>
             <form onSubmit={handleSubmit}>
-                <h4>Edit Sighting</h4>
-                <label>Date: </label>
+                <h4>Edit Post</h4>
+                <img src={editPost.image}></img>
+                <br/>
+                <label>Caption text: </label>
                 <input
                     type="text" name="date"
-                    value={editSighting.date}
-                    onChange={handleChange}
-                    placeholder="YYYY-MM-DD"
-                />
-                <br/>
-                <label>Location: </label>
-                <input
-                    type="text" name="location"
-                    value={editSighting.location}
-                    onChange={handleChange}
-                    placeholder="city, state"
-                />
-                <br/>
-                <label>Notes: </label>
-                <textarea
-                    type="text" name="notes"
-                    value={editSighting.notes}
+                    value={editPost.post.caption}
                     onChange={handleChange}
                 />
                 <br/>
-                <button type="submit">Save Sighting</button>
-                <button onClick={handleDelete}>Delete Sighting</button>
+                <button type="submit">Save Post</button>
+                <button onClick={handleDelete}>Delete Post</button>
             </form>
             {errorsList}
-            <Link to={`/sightings`}>Back to Sightings</Link>
+            <Link to={`/posts`}>Back to Posts</Link>
             </>
-    */)}
+    )}
 }
 
 export default EditPost
