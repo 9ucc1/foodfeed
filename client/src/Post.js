@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {UserContext} from './context/user'
 import Comment from './Comment.js'
+import {Link} from 'react-router-dom'
 
 function Post({image_url, caption, post_id, user_id, comments}){
 
@@ -72,7 +73,7 @@ function Post({image_url, caption, post_id, user_id, comments}){
         <>
             <img src={image_url}></img>
             <div>{postUser.username}: {caption}</div>
-            {user.id === null || user.id != postUser.id ? <></> : <button onClick={handleDelete}>Delete Post</button>}
+            {user.id === null || user.id != postUser.id ? <></> : <Link to={`/posts/${post_id}`}>Edit Post</Link>}
             <h4>Comments</h4>
             <div>{comments.map(comment => (
                 <>

@@ -12,6 +12,7 @@ import Profile from './Profile.js'
 import EditProfile from './EditProfile.js'
 import NewPost from './NewPost.js'
 import Posts from './Posts.js'
+import EditPost from './EditPost.js'
 
 function App() {
   /*const [count, setCount] = useState(0)
@@ -35,6 +36,9 @@ function App() {
           </Route>
           <Route path='/users/:id'>
             <Profile/>
+          </Route>
+          <Route path='/posts/:id'>
+            <EditPost/>
           </Route>
           <Route path='/posts/new'>
             <NewPost/>
