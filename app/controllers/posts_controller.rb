@@ -23,6 +23,12 @@ class PostsController < ApplicationController
         # render these as timestamp latest first
     end
 
+    def update
+        post = Post.find(params[:id])
+        post.update!(post_params)
+        render json: post, include: :image
+    end
+
     def destroy
         post = Post.find(params[:id])
         post.destroy

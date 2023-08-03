@@ -38,13 +38,13 @@ function EditPost(){
             body: JSON.stringify(editPost)
         })
         .then(r=>r.json())
-        .then(sighting=>{
-            if (sighting.errors){
-                const errorLis = sighting.errors.map(error => <li>{error}</li>)
+        .then(post=>{
+            if (post.errors){
+                const errorLis = post.errors.map(error => <li>{error}</li>)
                 setErrorsList(errorLis)
             } else {
                 //patchSighting(sighting)
-                alert("sighting updated!")
+                alert("post updated!")
             }
         })
     }
