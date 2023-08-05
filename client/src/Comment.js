@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {UserContext} from './context/user'
 import {Link} from 'react-router-dom'
 
-function Comment({post_id, comment_id, comment_user_id, text}){
+function Comment({post_id, comment_id, comment_user_id, text, timestamp}){
 
     const {user} = useContext(UserContext)
 
@@ -22,7 +22,7 @@ function Comment({post_id, comment_id, comment_user_id, text}){
 
     return(
         <>
-        {text} {post_id} {comment_id} <Link to={`/users/${comment_user_id}`}>link</Link>
+        {text} {post_id} {comment_id} <Link to={`/users/${comment_user_id}`}>link</Link> at {timestamp}
         {user.id == comment_user_id ? <button onClick={handleDelete}>Delete</button> : <></>}
         <br/>
         </>
