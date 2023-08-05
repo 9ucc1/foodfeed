@@ -37,11 +37,11 @@ function App() {
           <Route path='/users/:id'>
             <Profile/>
           </Route>
-          <Route path='/posts/:id'>
-            <EditPost/>
-          </Route>
           <Route path='/posts/new'>
             <NewPost/>
+          </Route>
+          <Route path='/posts/:id'>
+            <EditPost/>
           </Route>
           <Route path='/posts'>
             <Posts/>

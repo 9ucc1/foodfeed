@@ -2,9 +2,10 @@ import React, {useContext} from 'react'
 import {UserContext} from './context/user'
 import {Link} from 'react-router-dom'
 
-function Comment({post_id, comment_id, comment_user_id, text, timestamp}){
+function Comment({post_id, comment_id, comment_username, comment_user_id, text, timestamp, comment}){
 
     const {user} = useContext(UserContext)
+    console.log(comment)
 
     function handleDelete(e){
         console.log("delete")
@@ -22,7 +23,7 @@ function Comment({post_id, comment_id, comment_user_id, text, timestamp}){
 
     return(
         <>
-        {text} {post_id} {comment_id} <Link to={`/users/${comment_user_id}`}>link</Link> at {timestamp}
+        <Link to={`/users/${comment_user_id}`}>{comment_username}</Link>: {text} at {timestamp}
         {user.id == comment_user_id ? <button onClick={handleDelete}>Delete</button> : <></>}
         <br/>
         </>

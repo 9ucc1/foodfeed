@@ -63,6 +63,8 @@ function Post({image_url, caption, post_id, user_id, comments}){
                     comment_id={comment.id} 
                     text={comment.text}
                     timestamp={comment.timestamp}
+                    comment_username={comment.username}
+                    comment = {comment}
                     />
                 </>
             ))}</div>
