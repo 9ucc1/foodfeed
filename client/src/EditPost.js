@@ -43,7 +43,6 @@ function EditPost(){
                 const errorLis = post.errors.map(error => <li>{error}</li>)
                 setErrorsList(errorLis)
             } else {
-                //patchSighting(sighting)
                 alert("post updated!")
             }
         })

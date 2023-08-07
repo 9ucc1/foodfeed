@@ -4,7 +4,8 @@ class PostsController < ApplicationController
 
     def create
         post = Post.create!(post_params)
-        render json: post, include: :image
+        render json: post, include: :image, include: :comments, status: :created
+        # initialize with comments
     end
 
     def show
@@ -34,7 +35,7 @@ class PostsController < ApplicationController
     private
 
     def post_params
-        params.require(:post).permit(:user_id, :image, :caption)
+        params.require(:post).permit(:user_id, :image, :caption, comments: [])
     end
 
 end

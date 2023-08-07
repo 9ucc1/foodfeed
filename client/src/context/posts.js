@@ -21,8 +21,12 @@ function PostsProvider({children}){
         )
     }
 
+    const addPost = (addedPost) => {
+        setPosts([...posts, addedPost])
+    }
+
     return (
-        <PostsContext.Provider value={{posts}}>
+        <PostsContext.Provider value={{posts, addPost}}>
             {children}
         </PostsContext.Provider>
     )

@@ -1,5 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {UserContext} from './context/user'
+import {PostsContext} from './context/posts'
+import {useHistory} from 'react-router-dom'
 
 function NewPost(){
 
@@ -9,7 +11,10 @@ function NewPost(){
     }
 
     const {user} = useContext(UserContext)
+    const {addPost} = useContext(PostsContext)
     const [newPost, setNewPost] = useState(initialNewPost)
+    const [errorsList, setErrorsList] = useState("")
+    const history = useHistory()
 
     function handleChange(e){
         if(e.target.name === 'image'){
@@ -43,7 +48,20 @@ function NewPost(){
             body: formData
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
+        /*.then(post=>{
+            if (!post.errors){
+                addPost(post)
+                //alert("new post created!")
+                history.push('/posts')
+            } else {
+                const errorLis = post.errors.map(error =><li>{error}</li>)
+                setErrorsList(errorLis)
+            }
+        })*/
+        .then(post=>{
+            addPost(post)
+            history.push('/posts')
+        })
     }
 
     return(
@@ -67,6 +85,7 @@ function NewPost(){
         <br/>
         <button type="submit">Create Post</button>
         </form>
+        {errorsList}
         </>
     )
 }
