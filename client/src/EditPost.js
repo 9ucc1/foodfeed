@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from './context/user'
+import {PostsContext} from './context/posts'
 import {useParams, Link, useHistory} from 'react-router-dom'
 
 function EditPost(){
@@ -7,18 +8,20 @@ function EditPost(){
     // i only want to edit the caption, so don't submit the editPost
 
     const {user} = useContext(UserContext)
-    const [editPost, setEditPost] = useState({image: "", post: {user_id: ""}})
-    //const [editCaption, setEditCaption] = useState("")
+    const {posts, deletePost} = useContext(PostsContext)
+    const [editPost, setEditPost] = useState({image: "", post: {user_id: "", caption: ""}})
     const [errorsList, setErrorsList] = useState([])
     const params = useParams()
     const history = useHistory()
 
     useEffect(()=> {
-        fetch(`/posts/${params.id}`)
+        /*fetch(`/posts/${params.id}`)
         .then(r=>r.json())
         .then(post=>{
             setEditPost(post)
-        })
+        })*/
+        const ePost = posts.find(post=>post.id == params.id)
+        setEditPost(ePost)
     }, [])
     console.log(editPost, user)
 
@@ -49,7 +52,18 @@ function EditPost(){
     }
 
     function handleDelete(){
-        console.log("delete")
+        fetch(`/posts/${params.id}`,{
+            method: "DELETE",
+        })
+        .then(r=> {
+            if (r.ok){
+                //deleteSighting(params.id, userBird)
+                console.log(r)
+                deletePost(params.id)
+            }
+        })
+        alert("post deleted!")
+        history.push(`/posts`)
     }
 
     /*if (!user || user.error || user.id != editPost.post.user_id){
@@ -59,12 +73,12 @@ function EditPost(){
             <>
             <form onSubmit={handleSubmit}>
                 <h4>Edit Post</h4>
-                <img src={editPost.image}></img>
+                <img src={editPost.image_url}></img>
                 <br/>
                 <label>Caption text: </label>
                 <input
                     type="text" name="caption"
-                    value={editPost.post.caption}
+                    value={editPost.caption}
                     onChange={handleChange}
                 />
                 <br/>

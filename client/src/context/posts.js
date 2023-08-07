@@ -15,6 +15,8 @@ function PostsProvider({children}){
         })
     }, [])
 
+    //console.log(posts)
+
     if (!isLoaded){
         return(
             <p>Loading...</p>
@@ -25,8 +27,13 @@ function PostsProvider({children}){
         setPosts([...posts, addedPost])
     }
 
+    const deletePost = (deletedPostId) => {
+        const updatedPosts = posts.filter(post=>post.id != deletedPostId)
+        setPosts(updatedPosts)
+    }
+
     return (
-        <PostsContext.Provider value={{posts, addPost}}>
+        <PostsContext.Provider value={{posts, addPost, deletePost}}>
             {children}
         </PostsContext.Provider>
     )

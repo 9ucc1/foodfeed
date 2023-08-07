@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom'
 function Comment({post_id, comment_id, comment_username, comment_user_id, text, timestamp, comment}){
 
     const {user} = useContext(UserContext)
-    console.log(comment)
+    //console.log(comment)
 
     function handleDelete(e){
         console.log("delete")
