@@ -32,8 +32,25 @@ function PostsProvider({children}){
         setPosts(updatedPosts)
     }
 
+    const addComment = (addedComment) => {
+        console.log("add comment")
+    }
+
+    const deleteComment = (deletedCommentId, postId) => {
+        console.log(deletedCommentId, postId)
+        const updatedPost = posts.find(post=>post.id == postId)
+        const updatedComments = updatedPost.comments.filter(comment => comment.id != deletedCommentId)
+        updatedPost.comments = updatedComments
+        const updatedPosts = posts.map(post =>{
+            if(post.id == updatedPost.id){
+                return updatedPost
+            } else return post
+        })
+        setPosts(updatedPosts)
+    }
+
     return (
-        <PostsContext.Provider value={{posts, addPost, deletePost}}>
+        <PostsContext.Provider value={{posts, addPost, deletePost, addComment, deleteComment}}>
             {children}
         </PostsContext.Provider>
     )

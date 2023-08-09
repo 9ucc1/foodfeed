@@ -1,11 +1,12 @@
 import React, {useContext} from 'react'
 import {UserContext} from './context/user'
+import {PostsContext} from './context/posts'
 import {Link} from 'react-router-dom'
 
 function Comment({post_id, comment_id, comment_username, comment_user_id, text, timestamp, comment}){
 
     const {user} = useContext(UserContext)
-    //console.log(comment)
+    const {deleteComment} = useContext(PostsContext)
 
     function handleDelete(e){
         console.log("delete")
@@ -15,6 +16,7 @@ function Comment({post_id, comment_id, comment_username, comment_user_id, text, 
         .then(r=> {
             if (r.ok){
                 console.log("deleted")
+                deleteComment(comment_id, post_id)
             }
         })
     }
