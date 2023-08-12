@@ -33,7 +33,16 @@ function PostsProvider({children}){
     }
 
     const addComment = (addedComment) => {
-        console.log("add comment")
+        console.log(addedComment)
+        const updatedPost = posts.find(post=>post.id == addedComment.post_id)
+        const updatedComments = [...updatedPost.comments, addedComment]
+        updatedPost.comments = updatedComments
+        const updatedPosts = posts.map(post => {
+            if(post.id == updatedPost.id){
+                return updatedPost
+            } else return post
+        })
+        setPosts(updatedPosts)
     }
 
     const deleteComment = (deletedCommentId, postId) => {

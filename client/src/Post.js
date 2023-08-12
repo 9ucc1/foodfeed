@@ -1,5 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react'
 import {UserContext} from './context/user'
+import {PostsContext} from './context/posts'
 import Comment from './Comment.js'
 import {Link} from 'react-router-dom'
 
@@ -8,6 +9,8 @@ function Post({image_url, caption, post_id, user_id, comments}){
     const [postUser, setPostUser] = useState([])
     const [newComment, setNewComment] = useState("")
     const {user} = useContext(UserContext)
+    const {addComment} = useContext(PostsContext)
+    const [errorsList, setErrorsList] = useState("")
 
     useEffect(()=>{
         fetch(`/users/${user_id}`)
@@ -19,13 +22,15 @@ function Post({image_url, caption, post_id, user_id, comments}){
         setNewComment(e.target.value)
     }
 
-    function handleSubmit(e){
+    /*function handleSubmit(e){
+        // refactor don't use formData
         e.preventDefault()
         const formData = new FormData();
         formData.append(`comment[text]`, newComment);
         formData.append(`comment[post_id]`, post_id);
         formData.append(`comment[user_id]`, user.id);
         submitData(formData)
+        console.log(formData)
     }
 
     function submitData(formData){
@@ -34,10 +39,35 @@ function Post({image_url, caption, post_id, user_id, comments}){
             body: formData
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
+        .then(r=>addComment(r))
+    }*/
+
+    function handleSubmit(e){
+        e.preventDefault()
+        const formData = {
+            text: newComment,
+            post_id: post_id,
+            user_id: user.id
+        }
+        console.log(formData)
+        fetch('/comments', {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(formData)
+        })
+        .then(r=>r.json())
+        .then(comment=>{
+            if (!comment.errors){
+                addComment(comment)
+                setNewComment("")
+            } else {
+                const errorLis = comment.errors.map(error =><li>{error}</li>)
+                setErrorsList(errorLis)
+            }
+        })
     }
 
-    function handleDelete(e){
+    /*function handleDelete(e){
         console.log("delete")
         fetch(`/posts/${post_id}`, {
             method: "DELETE",
@@ -47,7 +77,7 @@ function Post({image_url, caption, post_id, user_id, comments}){
                 console.log("deleted")
             }
         })
-    }
+    }*/
 
     return(
         <>
@@ -71,11 +101,12 @@ function Post({image_url, caption, post_id, user_id, comments}){
             {user === null || user.error ? (<p>Log in to join the conversation.</p>) :
             (<form onSubmit={handleSubmit}>
             <textarea
-                type="text" name="new_comment" value={newComment}
+                type="text" name="text" value={newComment}
                 onChange={handleChange}
             />
             <button type="submit">Post new comment</button>
             </form>)}
+            {errorsList}
             <br/>
         </>
     )
