@@ -5,7 +5,6 @@ class PostsController < ApplicationController
     def create
         post = Post.create!(post_params)
         render json: post, include: :image, include: :comments, status: :created
-        # initialize with comments
     end
 
     def show
@@ -16,7 +15,6 @@ class PostsController < ApplicationController
 
     def index
         posts = Post.all.order(created_at: :desc)
-        #render json: posts, include: :image
         render json: posts
     end
 
