@@ -1,12 +1,13 @@
 import React, {useContext, useState} from 'react'
 import {UserContext} from './context/user'
+import {useHistory} from 'react-router-dom'
 
 function EditProfile(){
 
     const {user} = useContext(UserContext)
-    //console.log(user)
     const [profile, setProfile] = useState(user.profile)
-    
+    const [errorsList, setErrorsList] = useState("")
+    const history = useHistory()
 
     function handleChange(e){
         if(e.target.name === 'image'){
@@ -22,58 +23,29 @@ function EditProfile(){
 
     function handleSubmit(e){
         e.preventDefault()
+        if(e.target.image.files[0] == undefined){
+            setErrorsList("please upload an avatar!")
+        } else {
         console.log(profile, e.target.image.files[0])
         const formData = new FormData();
         formData.append(`profile[display_name]`, profile.display_name);
         formData.append(`profile[bio]`, profile.bio);
         formData.append(`profile[image]`, e.target.image.files[0])
         submitData(formData)
-    }
-
-    // if image wasnt attached, attach a default
+    }}
 
     function submitData(formData){
         fetch(`/profiles/${profile.id}`,{
             method: "PATCH",
-            //headers: {"Content-Type": "application/json"},
-            //headers: { 'content-type': 'multipart/form-data' },
             body: formData
         })
         .then(r=>r.json())
-        .then(r=>console.log(r))
-    }
-
-    /*function handleSubmit(e){
-        e.preventDefault()
-        //console.log(profile)
-        fetch(`/profiles/${profile.id}`,{
-            method: "PATCH",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(
-                {
-                    "display_name": profile.display_name,
-                    "bio": profile.bio,
-                    "image": e.target.image.files[0]
-                }
-            ) //JSON.stringify(profile),
-        })
-        .then(r=>r.json())
-        .then(profile=>{
-            console.log(profile)
-            //console.log(e.target.image.files[0])
-            //uploadFile(e.target.image.files[0], profile)
+        .then(r=>{
+            setProfile(r)
+            alert("profile changes saved!")
+            history.push(`/users/${user.id}`)
         })
     }
-    function uploadFile(file, user){
-        const upload = new DirectUpload(file, 'http://localhost:3000/rails/active_storage/direct_uploads')
-        upload.create((error, blob) => {
-            if (error){
-                console.log(error)
-            } else {
-                console.log("no error")
-            }
-        })
-    }*/
 
     return(
         <>
@@ -85,7 +57,6 @@ function EditProfile(){
             <input 
                 type="text" name="display_name" value={profile.display_name}
                 onChange={handleChange}
-                //if left blank, revert to user.username
             />
         <br/>
         <label>User bio:</label>
@@ -98,7 +69,6 @@ function EditProfile(){
         <input
           type="file"
           name="image"
-          //multiple ref={imagesRef}
           className="file-upload"
           accept="image/png, image/jpeg, image/heic"
           onChange={handleChange}
@@ -106,6 +76,7 @@ function EditProfile(){
         <br/>
         <button type="submit">Save Changes</button>
         </form>
+        {errorsList}
         </>
     )
 }
