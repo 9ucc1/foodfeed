@@ -19,7 +19,7 @@ function Header(){
     return (
         <>
         <h2>FOODFEED</h2>
-        {user === null || user.error ? (<p>you are not logged in</p>) : (<p>you are logged in as <Link to={`/users/${user.profile.id}`}>{user.username}</Link></p>)}
+        {user === null || user.error ? (<p>you are not logged in</p>) : (<p>you are logged in as <Link to={`/users/${user.id}`}>{user.username}</Link></p>)}
         <NavLink
                 to="/"
                 exact

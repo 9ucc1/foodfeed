@@ -12,11 +12,15 @@ function Profile(){
     const {posts} = useContext(PostsContext)
     const [profile, setProfile] = useState({image: "", profile: {display_name: ""}})
     //console.log(params)
+    // params.id is the user id, you need the profile
 
     useEffect(()=>{
-        //fetch(`/profiles/${params.id}`)
         fetch(`/profiles/${params.id}`)
+        //fetch(`/users/${params.id}`)
         .then(r=>r.json())
+        //.then(user=>setProfileUser(user))
+        //fetch(`/profiles/${params.id}`)
+        //.then(r=>r.json())
         .then(r=>setProfile(r))
     },[])
     console.log(profile)

@@ -82,7 +82,7 @@ function Post({image_url, caption, post_id, user_id, comments}){
     return(
         <>
             <img src={image_url}></img>
-            <div>{postUser.username}: {caption}</div>
+            <div><Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption}</div>
             {user.id === null || user.id != postUser.id ? <></> : <Link to={`/posts/${post_id}`}>Edit Post</Link>}
             <h4>Comments</h4>
             <div>{comments.map(comment => (
