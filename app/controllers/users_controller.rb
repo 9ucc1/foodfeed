@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
 
-    skip_before_action :authorize, only: [:create]
+    skip_before_action :authorize, only: [:create, :index]
 
     def create
-        user = User.create(user_params)
+        user = User.create!(user_params)
+        byebug
         if user.valid?
             profile = Profile.create(user_id: user.id, display_name: user.username, bio: "")
             session[:user_id] = user.id

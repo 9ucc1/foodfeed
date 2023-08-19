@@ -12,15 +12,15 @@ function Signup(){
     const [errorsList, setErrorsList] = useState([])
 
     function handleSubmit(e){
-        console.log("submit")
+        console.log(username, password, passwordConfirmation)
         e.preventDefault()
         fetch('/signup', {
             method: "POST",
-            headers: {"Content-Type":"application/json"},
+            headers: {"Content-Type": "application/json"},
             body: JSON.stringify({
                 username: username,
                 password: password,
-                password_confirmation: passwordConfirmation
+                password_confirmation: passwordConfirmation,
             })
         })
         .then(r=>r.json())

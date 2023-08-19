@@ -31,36 +31,32 @@ function NewPost(){
 
     function handleSubmit(e){
         e.preventDefault()
+        if(e.target.image.files[0]==undefined){
+            setErrorsList("please upload a photo!")
+        } else {
         console.log(newPost)
         const formData = new FormData();
         formData.append(`post[caption]`, newPost.caption);
         formData.append(`post[image]`, e.target.image.files[0]);
         formData.append(`post[user_id]`, user.id);
         submitData(formData)
-    }
-    // must submit with image
+    }}
 
     function submitData(formData){
         fetch(`/posts`,{
             method: "POST",
-            //headers: {"Content-Type": "application/json"},
-            //headers: { 'content-type': 'multipart/form-data' },
             body: formData
         })
         .then(r=>r.json())
-        /*.then(post=>{
+        .then(post=>{
             if (!post.errors){
                 addPost(post)
-                //alert("new post created!")
+                alert("new post created!")
                 history.push('/posts')
             } else {
                 const errorLis = post.errors.map(error =><li>{error}</li>)
                 setErrorsList(errorLis)
             }
-        })*/
-        .then(post=>{
-            addPost(post)
-            history.push('/posts')
         })
     }
 

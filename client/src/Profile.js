@@ -14,6 +14,7 @@ function Profile(){
     //console.log(params)
 
     useEffect(()=>{
+        //fetch(`/profiles/${params.id}`)
         fetch(`/profiles/${params.id}`)
         .then(r=>r.json())
         .then(r=>setProfile(r))
