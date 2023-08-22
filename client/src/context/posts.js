@@ -22,7 +22,7 @@ function PostsProvider({children}){
     }
 
     const addPost = (addedPost) => {
-        setPosts([...posts, addedPost])
+        setPosts([addedPost, ...posts])
     }
 
     const deletePost = (deletedPostId) => {

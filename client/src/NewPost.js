@@ -5,12 +5,14 @@ import {useHistory} from 'react-router-dom'
 
 function NewPost(){
 
+    const {user} = useContext(UserContext)
+
     const initialNewPost = {
         caption: "",
-        image: []
+        image: [],
+        user_id: user.id
     }
 
-    const {user} = useContext(UserContext)
     const {addPost} = useContext(PostsContext)
     const [newPost, setNewPost] = useState(initialNewPost)
     const [errorsList, setErrorsList] = useState("")
