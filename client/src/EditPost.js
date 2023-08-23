@@ -2,8 +2,17 @@ import React, {useContext, useEffect, useState} from 'react'
 import {UserContext} from './context/user'
 import {PostsContext} from './context/posts'
 import {useParams, Link, useHistory} from 'react-router-dom'
+import styled from 'styled-components'
 
 function EditPost(){
+
+    const Background = styled.div`
+    background: white;
+    padding: 1em;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+    `
 
     // i only want to edit the caption, so don't submit the editPost
 
@@ -27,9 +36,10 @@ function EditPost(){
 
     function handleChange(e){
         //setEditPost(currentPost=>({...currentPost, post: {[e.target.name]: e.target.value}}))
-        console.log(e.target.name, e.target.value)
+        //console.log(e.target.name, e.target.value)
         // setting editPost.post.caption to e.target.value
-        setEditPost(currentPost=>({...currentPost, post: {...currentPost.post, [e.target.name]: e.target.value}}))
+        //setEditPost(currentPost=>({...currentPost, post: {...currentPost.post, [e.target.name]: e.target.value}}))
+        setEditPost(currentPost => ({...currentPost, [e.target.name]: e.target.value}))
         console.log(editPost)
     }
 
@@ -67,10 +77,10 @@ function EditPost(){
     }
 
     /*if (!user || user.error || user.id != editPost.post.user_id){
-        return <h3>You're not authorized to edit this post.</h3>
+        return <Background><h3>You're not authorized to edit this post.</h3></Background>
     } else {*/
         return(
-            <>
+            <Background>
             <form onSubmit={handleSubmit}>
                 <h4>Edit Post</h4>
                 <img src={editPost.image_url}></img>
@@ -88,7 +98,7 @@ function EditPost(){
             {errorsList}
             <br/>
             <Link to={`/posts`}>Back to Posts</Link>
-            </>
+            </Background>
     )/*}*/
 }
 

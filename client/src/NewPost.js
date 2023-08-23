@@ -2,8 +2,17 @@ import React, {useContext, useState} from 'react'
 import {UserContext} from './context/user'
 import {PostsContext} from './context/posts'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components'
 
 function NewPost(){
+
+    const Background = styled.div`
+    background: white;
+    padding: 1em;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    text-align: center;
+    `
 
     const {user} = useContext(UserContext)
 
@@ -63,8 +72,8 @@ function NewPost(){
     }
 
     return(
-        <>
-        <div>new post</div>
+        <Background>
+        <h3>New Post</h3>
         <form onSubmit={handleSubmit}>
         <label>Upload Image:</label>
         <input
@@ -84,7 +93,7 @@ function NewPost(){
         <button type="submit">Create Post</button>
         </form>
         {errorsList}
-        </>
+        </Background>
     )
 }
 
