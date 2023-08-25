@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     def update
         post = Post.find(params[:id])
         post.update!(post_params)
-        render json: post, include: :image
+        render json: post, include: :image, include: :comments
     end
 
     def destroy

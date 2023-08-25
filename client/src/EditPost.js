@@ -10,14 +10,13 @@ function EditPost(){
     background: white;
     padding: 1em;
     padding-top: 80px;
-    padding-bottom: 80px;
     text-align: center;
     `
 
     // i only want to edit the caption, so don't submit the editPost
 
     const {user} = useContext(UserContext)
-    const {posts, deletePost} = useContext(PostsContext)
+    const {posts, deletePost, patchPost} = useContext(PostsContext)
     const [editPost, setEditPost] = useState({image: "", post: {user_id: "", caption: ""}})
     const [errorsList, setErrorsList] = useState([])
     const params = useParams()
@@ -56,7 +55,10 @@ function EditPost(){
                 const errorLis = post.errors.map(error => <li>{error}</li>)
                 setErrorsList(errorLis)
             } else {
+                //patch ur context whatever
+                patchPost(post)
                 alert("post updated!")
+                history.push(`/posts`)
             }
         })
     }
@@ -67,7 +69,6 @@ function EditPost(){
         })
         .then(r=> {
             if (r.ok){
-                //deleteSighting(params.id, userBird)
                 console.log(r)
                 deletePost(params.id)
             }
@@ -80,7 +81,8 @@ function EditPost(){
         return <Background><h3>You're not authorized to edit this post.</h3></Background>
     } else {*/
         return(
-            <Background>
+            <>
+            <Background></Background>
             <form onSubmit={handleSubmit}>
                 <h4>Edit Post</h4>
                 <img src={editPost.image_url}></img>
@@ -98,7 +100,7 @@ function EditPost(){
             {errorsList}
             <br/>
             <Link to={`/posts`}>Back to Posts</Link>
-            </Background>
+            </>
     )/*}*/
 }
 

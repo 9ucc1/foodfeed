@@ -30,6 +30,12 @@ function PostsProvider({children}){
         setPosts(updatedPosts)
     }
 
+    const patchPost = (editedPost) => {
+        console.log(editedPost)
+        const updatedPosts = posts.map(post=>post.id === editedPost.id ? editedPost : post)
+        setPosts(updatedPosts)
+    }
+
     const addComment = (addedComment) => {
         console.log(addedComment)
         const updatedPost = posts.find(post=>post.id == addedComment.post_id)
@@ -57,7 +63,7 @@ function PostsProvider({children}){
     }
 
     return (
-        <PostsContext.Provider value={{posts, addPost, deletePost, addComment, deleteComment}}>
+        <PostsContext.Provider value={{posts, addPost, deletePost, patchPost, addComment, deleteComment}}>
             {children}
         </PostsContext.Provider>
     )
