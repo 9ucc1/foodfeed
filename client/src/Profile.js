@@ -49,7 +49,7 @@ function Profile(){
             Edit my profile</Link> : <div></div>}
         </Columns>
         <h3>{profile.profile.display_name}'s posts</h3>
-        {profilePosts.map(post=><Post 
+        {profilePosts.length === 0 ? <h4>This user has no posts yet.</h4> :profilePosts.map(post=><Post 
             image_url = {post.image_url}
             caption = {post.caption}
             post_id = {post.id}

@@ -3,8 +3,19 @@ import {UserContext} from './context/user'
 import {PostsContext} from './context/posts'
 import Comment from './Comment.js'
 import {Link} from 'react-router-dom'
+import styled from 'styled-components'
 
-function Post({image_url, caption, post_id, user_id, comments}){
+function Post({image_url, caption, post_id, user_id, comments, timestamp}){
+
+    const Text = styled.div`
+    max-width: 600px;
+    `
+    
+    const Timestamp = styled.p`
+    color: gray;
+    text-align: right;
+    font-size: 11px;
+    `
 
     const [postUser, setPostUser] = useState([])
     const [newComment, setNewComment] = useState("")
@@ -49,10 +60,10 @@ function Post({image_url, caption, post_id, user_id, comments}){
 
     return(
         <>
-            <img src={image_url}></img>
-            <div><Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption}</div>
+            <img src={image_url}></img> <br/>
             {user.id === null || user.id != postUser.id ? <></> : <button><Link to={`/posts/${post_id}`}>Edit Post</Link></button>}
-            <h4>Comments</h4>
+            <Text><Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption} <Timestamp>{timestamp}</Timestamp></Text>
+            <h3>Comments</h3>
             <div>{comments.map(comment => (
                 <>
                     <Comment 

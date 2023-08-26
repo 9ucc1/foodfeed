@@ -26,6 +26,7 @@ function Posts(){
                 post_id = {post.id}
                 user_id = {post.user_id}
                 comments = {post.comments}
+                timestamp = {post.timestamp}
             />
         ))}
         </Background>

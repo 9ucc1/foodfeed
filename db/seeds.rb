@@ -33,7 +33,7 @@ prof2 = Profile.create(
     bio: "I like food",
     user_id: 2
 )
-prof2.image.attach(io: File.open(Rails.root.join('db/images/banana.jpeg')),
+prof2.image.attach(io: File.open(Rails.root.join('db/images/banana.jpg')),
 filename: 'banana.jpeg')
 
 post1 = Post.create(
@@ -41,8 +41,8 @@ post1 = Post.create(
     caption: "what I ate today!",
     user_id: 1
 )
-post1.image.attach(io: File.open(Rails.root.join('db/images/apple.jpeg')),
-filename: 'apple.jpeg')
+post1.image.attach(io: File.open(Rails.root.join('db/images/ramen.jpg')),
+filename: 'ramen.jpeg')
 
 post2 = Post.create(
     id: 2,
@@ -63,6 +63,28 @@ Comment.create(
     post_id: 2,
     user_id: 2
 )
+
+post3 = Post.create(
+    id: 3,
+    caption: "Deep dish pizza in Chicago!",
+    user_id: 1
+)
+post3.image.attach(io: File.open(Rails.root.join('db/images/pizza.jpg')),
+filename: 'pizza.jpg')
+
+Comment.create(
+    text: "Looking back this was the best pizza I've ever had!",
+    post_id: 3,
+    user_id: 1
+)
+
+post4 = Post.create(
+    id: 4,
+    caption: "This is a mango sago dessert that was really good!",
+    user_id: 1
+)
+post4.image.attach(io: File.open(Rails.root.join('db/images/mango.jpg')),
+filename: 'mango.jpg')
 
 
 puts "seeded"

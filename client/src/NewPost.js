@@ -10,7 +10,6 @@ function NewPost(){
     background: white;
     padding: 1em;
     padding-top: 80px;
-    padding-bottom: 80px;
     text-align: center;
     `
 
@@ -72,7 +71,8 @@ function NewPost(){
     }
 
     return(
-        <Background>
+        <>
+        <Background/>
         <h3>New Post</h3>
         <form onSubmit={handleSubmit}>
         <label>Upload Image:</label>
@@ -93,7 +93,7 @@ function NewPost(){
         <button type="submit">Create Post</button>
         </form>
         {errorsList}
-        </Background>
+        </>
     )
 }
 
