@@ -28,10 +28,13 @@ class ProfilesController < ApplicationController
 
     def show
         profile = Profile.find(params[:id])
+        # if no display name, display the username
         if profile.image.attached?
             avatar = rails_blob_path(profile.image)
         else 
-            avatar = []
+            #avatar = []
+            profile.image.attach(io: File.open(Rails.root.join('db/images/avatar.jpeg')),
+            filename: 'avatar.jpeg')
         end
         render json: {profile: profile, image: avatar}
     end

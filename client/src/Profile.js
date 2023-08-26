@@ -43,7 +43,7 @@ function Profile(){
         <br/>
         <Columns>
             <Avatar src={profile.image}/>
-            <h3>{profile.profile.display_name}</h3>
+            <h2>{profile.profile.display_name}</h2>
             <div>{profile.profile.bio}</div>
             {params.id==user.id ? <Link to={`/users/${user.id}/edit`}>
             Edit my profile</Link> : <div></div>}

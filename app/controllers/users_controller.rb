@@ -2,8 +2,7 @@ class UsersController < ApplicationController
     skip_before_action :authorize, only: [:create, :index, :show]
 
     def create
-        user = User.create!(user_params)
-        byebug
+        user = User.create(user_params)
         if user.valid?
             profile = Profile.create(user_id: user.id, display_name: user.username, bio: "")
             session[:user_id] = user.id
@@ -34,6 +33,7 @@ class UsersController < ApplicationController
     private
 
     def user_params
+        #params.require(:user).permit(:username, :password, :password_confirmation)
         params.permit(:username, :password, :password_confirmation)
     end
 end
