@@ -1,8 +1,16 @@
 import React, {useState, useContext} from 'react'
 import {UserContext} from './context/user'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components'
 
 function Signup(){
+
+    const Background = styled.div`
+    background: white;
+    padding: 1em;
+    padding-top: 80px;
+    text-align: center;
+    `
 
     const history = useHistory()
     const {signup} = useContext(UserContext)
@@ -41,7 +49,8 @@ function Signup(){
 
     return (
         <>
-        <div>Create a new account</div>
+        <Background/>
+        <h3>Create a new account</h3>
         <form onSubmit={handleSubmit}>
             <label>Username:</label>
             <input

@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import {UserContext} from './context/user'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components'
 
 function EditProfile(){
 
@@ -8,6 +9,13 @@ function EditProfile(){
     const [profile, setProfile] = useState(user.profile)
     const [errorsList, setErrorsList] = useState("")
     const history = useHistory()
+
+    const Background = styled.div`
+    background: white;
+    padding: 1em;
+    padding-top: 80px;
+    text-align: center;
+    `
 
     function handleChange(e){
         if(e.target.name === 'image'){
@@ -49,7 +57,8 @@ function EditProfile(){
 
     return(
         <>
-        <div>editprofile</div>
+        <Background/>
+        <h4>Edit Profile</h4>
         <form onSubmit={handleSubmit}>
         <label>Your username: {user.username}</label>
         <br/>

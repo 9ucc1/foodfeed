@@ -17,7 +17,7 @@ function Homepage(){
     if (!user || user.error) {
         return (<Background>
         <h2>Welcome!</h2>
-        <h3>FoodFeed is a social media app for you to share pictures of food you made or just enjoyed.</h3>
+        <h3>FoodFeed is a social media app for you to share pictures of food you made or enjoyed.</h3>
         <h3>Please log in or create an account to browse and create posts.</h3>
         </Background>
         )

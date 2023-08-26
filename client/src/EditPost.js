@@ -6,11 +6,10 @@ import styled from 'styled-components'
 
 function EditPost(){
 
-    const Background = styled.div`
+    const Spacer = styled.div`
     background: white;
     padding: 1em;
     padding-top: 80px;
-    text-align: center;
     `
 
     const {user} = useContext(UserContext)
@@ -66,13 +65,13 @@ function EditPost(){
     }
 
     if (editPost == undefined || !user || user.error || user.id != editPost.user_id ){
-        return <Background><h3>You're not authorized to edit this post.</h3></Background>
+        return <Spacer><h3>You're not authorized to edit this post.</h3></Spacer>
     } else {
         return(
             <>
-            <Background></Background>
+            <Spacer/>
             <form onSubmit={handleSubmit}>
-                <h4>Edit Post</h4>
+                <h3>Edit Post</h3>
                 <img src={editPost.image_url}></img>
                 <br/>
                 <label>Caption text: </label>
@@ -88,6 +87,7 @@ function EditPost(){
             {errorsList}
             <br/>
             <Link to={`/posts`}>Back to Posts</Link>
+            <Spacer/>
             </>
     )}
 }

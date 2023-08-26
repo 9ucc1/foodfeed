@@ -1,8 +1,16 @@
 import React, {useState, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
 import {UserContext} from './context/user'
+import styled from 'styled-components'
 
 function Login(){
+
+    const Background = styled.div`
+    background: white;
+    padding: 1em;
+    padding-top: 100px;
+    text-align: center;
+    `
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -36,6 +44,7 @@ function Login(){
 
     return(
         <>
+        <Background/>
         <form onSubmit={handleSubmit}>
             <label>Username:</label>
             <input

@@ -3,7 +3,7 @@ import {useParams, Link} from 'react-router-dom'
 import {UserContext} from './context/user'
 import {PostsContext} from './context/posts'
 import Post from './Post.js'
-
+import styled from 'styled-components'
 
 function Profile(){
 
@@ -11,54 +11,52 @@ function Profile(){
     const {user} = useContext(UserContext)
     const {posts} = useContext(PostsContext)
     const [profile, setProfile] = useState({image: "", profile: {display_name: ""}})
-    //console.log(params)
-    // params.id is the user id, you need the profile
+    const profilePosts = posts.filter(post=>post.user_id == params.id)
+
+    const Columns = styled.div`
+    column-count: 2;
+    text-align: left;
+    width: 500px;
+    `;
+
+    const Background = styled.div`
+    background: white;
+    padding: 1em;
+    padding-top: 80px;
+    text-align: center;
+    `
+
+    const Avatar = styled.img`
+    width: 100px;
+    border: solid;
+    `
 
     useEffect(()=>{
         fetch(`/profiles/${params.id}`)
-        //fetch(`/users/${params.id}`)
         .then(r=>r.json())
-        //.then(user=>setProfileUser(user))
-        //fetch(`/profiles/${params.id}`)
-        //.then(r=>r.json())
         .then(r=>setProfile(r))
     },[])
     console.log(profile)
 
-    /*function renderPosts(){
-        const profilePosts = posts.filter(post=>post.user_id == params.id)
-        profilePosts.map(post=><Post 
-            image_url = {post.image_url}
-            caption = {post.caption}
-            post_id = {post.id}
-            user_id = {post.user_id}
-            comments = {post.comments}
-        />)
-        console.log(posts)
-    }*/
-
-    const profilePosts = posts.filter(post=>post.user_id == params.id)
-
     return(
-        <>
+        <Background>
         <br/>
-        {params.id==user.id ? <Link to={`/users/${user.id}/edit`}>
-            Edit my profile
-        </Link> : <div></div>}
-        <div>
-            <img src={profile.image}/>
+        <Columns>
+            <Avatar src={profile.image}/>
             <h3>{profile.profile.display_name}</h3>
             <div>{profile.profile.bio}</div>
-            <h3>{profile.profile.display_name}'s posts</h3>
-        </div>
-        {        profilePosts.map(post=><Post 
+            {params.id==user.id ? <Link to={`/users/${user.id}/edit`}>
+            Edit my profile</Link> : <div></div>}
+        </Columns>
+        <h3>{profile.profile.display_name}'s posts</h3>
+        {profilePosts.map(post=><Post 
             image_url = {post.image_url}
             caption = {post.caption}
             post_id = {post.id}
             user_id = {post.user_id}
             comments = {post.comments}
         />)}
-        </>
+        </Background>
     )
 }
 

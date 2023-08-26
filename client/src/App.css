@@ -14,5 +14,6 @@
 }
 
 img {
-  max-width: 300px
+  width: 350px;
+  border: solid;
 }

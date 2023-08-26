@@ -22,26 +22,6 @@ function Post({image_url, caption, post_id, user_id, comments}){
         setNewComment(e.target.value)
     }
 
-    /*function handleSubmit(e){
-        // refactor don't use formData
-        e.preventDefault()
-        const formData = new FormData();
-        formData.append(`comment[text]`, newComment);
-        formData.append(`comment[post_id]`, post_id);
-        formData.append(`comment[user_id]`, user.id);
-        submitData(formData)
-        console.log(formData)
-    }
-
-    function submitData(formData){
-        fetch(`/comments`,{
-            method: "POST",
-            body: formData
-        })
-        .then(r=>r.json())
-        .then(r=>addComment(r))
-    }*/
-
     function handleSubmit(e){
         e.preventDefault()
         const formData = {
@@ -67,23 +47,11 @@ function Post({image_url, caption, post_id, user_id, comments}){
         })
     }
 
-    /*function handleDelete(e){
-        console.log("delete")
-        fetch(`/posts/${post_id}`, {
-            method: "DELETE",
-        })
-        .then(r=> {
-            if (r.ok){
-                console.log("deleted")
-            }
-        })
-    }*/
-
     return(
         <>
             <img src={image_url}></img>
             <div><Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption}</div>
-            {user.id === null || user.id != postUser.id ? <></> : <Link to={`/posts/${post_id}`}>Edit Post</Link>}
+            {user.id === null || user.id != postUser.id ? <></> : <button><Link to={`/posts/${post_id}`}>Edit Post</Link></button>}
             <h4>Comments</h4>
             <div>{comments.map(comment => (
                 <>
