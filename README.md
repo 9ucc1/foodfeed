@@ -4,6 +4,9 @@ Social media type app inspired by BeReal, challenging users to upload a candid (
 
 Post a picture of something you cooked, new food you tried at a restaurant, hold yourself accountable to a diet, or check up on yourself and your friends and make sure everyone is eating. Share words of encouragement, recipes, restaurant recs, etc with comments and likes. Personalize your profile with a bio, profile picture, etc.
 
+# Preview
+![](foodgif.gif)
+
 Connect with friends - comment on each other’s posts
 
 New technology: ActiveStorage to upload files
