@@ -9,6 +9,7 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
 
     const Text = styled.div`
     max-width: 600px;
+    font-weight: 600;
     `
     
     const Timestamp = styled.p`
@@ -17,11 +18,17 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
     font-size: 11px;
     `
 
-    const [postUser, setPostUser] = useState([])
+    const Avatar = styled.img`
+    width: 35px;
+    border: none;
+    `
+
+    const [postUser, setPostUser] = useState({profile: {image_url: ""}})
     const [newComment, setNewComment] = useState("")
     const {user} = useContext(UserContext)
     const {addComment} = useContext(PostsContext)
     const [errorsList, setErrorsList] = useState("")
+    console.log(postUser)
 
     useEffect(()=>{
         fetch(`/users/${user_id}`)
@@ -40,7 +47,7 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
             post_id: post_id,
             user_id: user.id
         }
-        console.log(formData)
+        //console.log(formData)
         fetch('/comments', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -62,7 +69,10 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
         <>
             <img src={image_url}></img> <br/>
             {user.id === null || user.id != postUser.id ? <></> : <button><Link to={`/posts/${post_id}`}>Edit Post</Link></button>}
-            <Text><Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption} <Timestamp>{timestamp}</Timestamp></Text>
+            <Text>
+            <Avatar src={postUser.profile.image_url}/>
+                <Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption} <Timestamp>{timestamp}</Timestamp>
+            </Text>
             <h3>Comments</h3>
             <div>{comments.map(comment => (
                 <>
