@@ -44,7 +44,6 @@ function NewPost(){
         if(e.target.image.files[0]==undefined){
             setErrorsList("please upload a photo!")
         } else {
-        console.log(newPost)
         const formData = new FormData();
         formData.append(`post[caption]`, newPost.caption);
         formData.append(`post[image]`, e.target.image.files[0]);

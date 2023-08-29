@@ -36,7 +36,6 @@ function Profile(){
         .then(r=>r.json())
         .then(r=>setProfile(r))
     },[params.id])
-    console.log(profile)
 
     return(
         <Background>

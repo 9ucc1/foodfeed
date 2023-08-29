@@ -28,7 +28,6 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
     const {user} = useContext(UserContext)
     const {addComment} = useContext(PostsContext)
     const [errorsList, setErrorsList] = useState("")
-    console.log(postUser)
 
     useEffect(()=>{
         fetch(`/users/${user_id}`)

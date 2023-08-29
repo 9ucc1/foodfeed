@@ -20,7 +20,6 @@ function Login(){
 
     function handleSubmit(e){
         e.preventDefault()
-        console.log("submit login")
         fetch('/login', {
             method: "POST",
             headers: {"Content-Type": "application/json"},

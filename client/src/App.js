@@ -1,5 +1,4 @@
 import './App.css';
-import {useState, useEffect} from 'react'
 import {UserProvider} from './context/user'
 import {PostsProvider} from './context/posts'
 import {Switch, Route} from 'react-router-dom'

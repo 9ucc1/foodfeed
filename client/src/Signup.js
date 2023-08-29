@@ -20,7 +20,6 @@ function Signup(){
     const [errorsList, setErrorsList] = useState([])
 
     function handleSubmit(e){
-        console.log(username, password, passwordConfirmation)
         e.preventDefault()
         fetch('/signup', {
             method: "POST",

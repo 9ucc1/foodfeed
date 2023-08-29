@@ -20,13 +20,11 @@ function Comment({post_id, comment_id, comment_username, comment_user_id, text, 
     const {deleteComment} = useContext(PostsContext)
 
     function handleDelete(e){
-        console.log("delete")
         fetch(`/comments/${comment_id}`, {
             method: "DELETE",
         })
         .then(r=> {
             if (r.ok){
-                console.log("deleted")
                 deleteComment(comment_id, post_id)
             }
         })
@@ -38,7 +36,6 @@ function Comment({post_id, comment_id, comment_username, comment_user_id, text, 
             <Link to={`/users/${comment_user_id}`}>{comment_username}</Link>: {text} 
             <Timestamp>
                 {timestamp}
-                {/*user.id === comment_user_id ? <button onClick={handleDelete}>Delete</button> : <></>*/}
                 {user === null || user.id === null || user.id !== comment_user_id ? <></> : <button onClick={handleDelete}>Delete</button> }
             </Timestamp>
         </Text>

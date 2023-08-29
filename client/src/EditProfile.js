@@ -34,7 +34,6 @@ function EditProfile(){
         if(e.target.image.files[0] == undefined){
             setErrorsList("please upload an avatar!")
         } else {
-        console.log(profile, e.target.image.files[0])
         const formData = new FormData();
         formData.append(`profile[display_name]`, profile.display_name);
         formData.append(`profile[bio]`, profile.bio);

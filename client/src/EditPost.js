@@ -23,11 +23,9 @@ function EditPost(){
         const ePost = posts.find(post=>post.id == params.id)
         setEditPost(ePost)
     }, [])
-    console.log(editPost, user)
 
     function handleChange(e){
         setEditPost(currentPost => ({...currentPost, [e.target.name]: e.target.value}))
-        console.log(editPost)
     }
 
     function handleSubmit(e){
@@ -56,7 +54,6 @@ function EditPost(){
         })
         .then(r=> {
             if (r.ok){
-                console.log(r)
                 deletePost(params.id)
             }
         })

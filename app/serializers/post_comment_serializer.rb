@@ -6,7 +6,6 @@ class PostCommentSerializer < ActiveModel::Serializer
   end
 
   def username
-    #user = User.find(self.object.user_id)
     user = User.find(self.object.user_id)
     user.username
   end
