@@ -35,7 +35,7 @@ function Profile(){
         fetch(`/profiles/${params.id}`)
         .then(r=>r.json())
         .then(r=>setProfile(r))
-    },[])
+    },[params.id])
     console.log(profile)
 
     return(
@@ -45,8 +45,8 @@ function Profile(){
             <Avatar src={profile.image}/>
             <h2>{profile.profile.display_name}</h2>
             <div>{profile.profile.bio}</div>
-            {params.id==user.id ? <Link to={`/users/${user.id}/edit`}>
-            Edit my profile</Link> : <div></div>}
+            {user.id === null || params.id !=user.id ? <></> : <Link to={`/users/${user.id}/edit`}>
+            Edit my profile</Link>}
         </Columns>
         <h3>{profile.profile.display_name}'s posts</h3>
         {profilePosts.length === 0 ? <h4>This user has no posts yet.</h4> :profilePosts.map(post=><Post 

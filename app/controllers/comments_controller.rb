@@ -3,10 +3,8 @@ class CommentsController < ApplicationController
     skip_before_action :authorize, only: [:index]
 
     def create
-        #byebug
         comment = Comment.create!(comment_params)
         render json: comment, status: :created
-        # find post connected to this comment, render the post 
     end
 
     def index
