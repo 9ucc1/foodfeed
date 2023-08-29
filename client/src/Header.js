@@ -32,6 +32,7 @@ function Header(){
     font-size: 1.5em;
     text-align: center;
     color: black;
+    padding: 10px;
     `;
 
     return (

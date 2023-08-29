@@ -14,17 +14,9 @@ import NewPost from './NewPost.js'
 import Posts from './Posts.js'
 import EditPost from './EditPost.js'
 
+
 function App() {
-  /*const [count, setCount] = useState(0)
 
-  useEffect(()=>{
-    fetch('/hello')
-    .then(r=>r.json())
-    .then(r=>setCount(r.count))
-  }, [])*/
-
-
-  //FIX PROFILE ROUTES
   return (
       <div className="App">
         <UserProvider>

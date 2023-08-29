@@ -8,7 +8,7 @@ import styled from 'styled-components'
 function Post({image_url, caption, post_id, user_id, comments, timestamp}){
 
     const Text = styled.div`
-    max-width: 600px;
+    max-width: 700px;
     font-weight: 600;
     `
     
@@ -23,7 +23,7 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
     border: none;
     `
 
-    const [postUser, setPostUser] = useState({profile: {image_url: ""}})
+    const [postUser, setPostUser] = useState({id: "", profile: {image_url: ""}})
     const [newComment, setNewComment] = useState("")
     const {user} = useContext(UserContext)
     const {addComment} = useContext(PostsContext)
@@ -47,7 +47,6 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
             post_id: post_id,
             user_id: user.id
         }
-        //console.log(formData)
         fetch('/comments', {
             method: "POST",
             headers: {"Content-Type": "application/json"},
@@ -68,7 +67,7 @@ function Post({image_url, caption, post_id, user_id, comments, timestamp}){
     return(
         <>
             <img src={image_url}></img> <br/>
-            {user.id === null || user.id != postUser.id ? <></> : <button><Link to={`/posts/${post_id}`}>Edit Post</Link></button>}
+            {user === null || user.id === null || user.id === undefined || user.id != postUser.id ? <></> : <button><Link to={`/posts/${post_id}`}>Edit Post</Link></button>}
             <Text>
             <Avatar src={postUser.profile.image_url}/>
                 <Link to={`/users/${postUser.id}`}>{postUser.username}</Link>: {caption} <Timestamp>{timestamp}</Timestamp>

@@ -4,10 +4,10 @@ import {PostsContext} from './context/posts'
 import {Link} from 'react-router-dom'
 import styled from 'styled-components'
 
-function Comment({post_id, comment_id, comment_username, comment_user_id, text, timestamp, comment}){
-
+function Comment({post_id, comment_id, comment_username, comment_user_id, text, timestamp}){
+    
     const Text = styled.div`
-    max-width: 600px;
+    max-width: 700px;
     `
     
     const Timestamp = styled.p`
@@ -38,7 +38,8 @@ function Comment({post_id, comment_id, comment_username, comment_user_id, text, 
             <Link to={`/users/${comment_user_id}`}>{comment_username}</Link>: {text} 
             <Timestamp>
                 {timestamp}
-                {user.id == comment_user_id ? <button onClick={handleDelete}>Delete</button> : <></>}
+                {/*user.id === comment_user_id ? <button onClick={handleDelete}>Delete</button> : <></>*/}
+                {user === null || user.id === null || user.id !== comment_user_id ? <></> : <button onClick={handleDelete}>Delete</button> }
             </Timestamp>
         </Text>
         <br/>

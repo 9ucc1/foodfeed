@@ -1,4 +1,7 @@
 class CommentsController < ApplicationController
+    before_action :authorize
+    skip_before_action :authorize, only: [:index]
+
     def create
         #byebug
         comment = Comment.create!(comment_params)
